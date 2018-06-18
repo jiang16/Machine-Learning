@@ -148,9 +148,17 @@ def mineTree(inTree, headerTable, minSup, preFix, freqItemSet):
 
 
 if __name__ == '__main__':
-    initSet = createInitSet(loadSimpleDat())
-    myFPTree, myHeaderTab = createTree(initSet, 3)
-    print myFPTree.disp()
-    freqItems = []
-    mineTree(myFPTree, myHeaderTab, 3, set([]), freqItems)
-    print freqItems
+    # initSet = createInitSet(loadSimpleDat())
+    # myFPTree, myHeaderTab = createTree(initSet, 3)
+    # print myFPTree.disp()
+    # freqItems = []
+    # mineTree(myFPTree, myHeaderTab, 3, set([]), freqItems)
+    # print freqItems
+    #寻找那些至少被十万人浏览过的新闻报道
+    parsedDat = [line.strip().split(' ') for line in open('kosarak.dat').readlines()]
+    initSet = createInitSet(parsedDat)
+    myFPTree, myHeaderTab = createTree(initSet, 100000)
+    myFreqList = []
+    mineTree(myFPTree, myHeaderTab, 100000, set([]), myFreqList)
+    print len(myFreqList)
+    print myFreqList
